@@ -228,3 +228,4 @@ fabric.properties
 ./data/*
 
 .png
+.vscode/*
