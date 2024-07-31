@@ -1,0 +1,7 @@
+[user]
+	name = wu-han-lin
+	email = wu18838738923@163.com
+[http]
+	proxy = http://172.24.56.11:9000
+[https]
+	proxy = http://172.24.56.11:9000

@@ -1,0 +1,42 @@
+# reproducibility
+deterministic: False
+random_seed: 42
+
+# training
+use_queue_clip: False
+gradient_clip_val: 0 # no clipping
+gradient_clip_algorithm: value
+
+pl_trainer:
+  fast_dev_run: False # Enable this for debug purposes
+  gpus: [0]
+  precision: 32
+  max_steps: 2000000
+  max_epochs: ${data.train_max_epochs}
+  accumulate_grad_batches: 1
+  num_sanity_val_steps: 2
+  profiler: simple
+  
+  # gpus: 1
+  # auto_select_gpus: True
+
+monitor_metric: 'val_loss'
+# monitor_metric: 'metric_amsd_precision'
+monitor_metric_mode: 'min'
+
+early_stopping:
+  patience: ${data.early_stopping_patience} 
+  verbose: False
+
+resume: true
+
+model_checkpoints:
+  save_top_k: 1
+  verbose: False
+
+ema:
+  enable: false
+  decay: 0.99
+  device: 'cuda'
+
+

@@ -1,0 +1,31 @@
+# log frequency
+val_check_interval: 8
+val_check_interval_step: 5000
+gen_check_interval: 80
+progress_bar_refresh_rate: 2
+
+run_gen: true
+debug_mode: false
+gen_check:
+  num_samples: 1000
+  start_epoch: 2000
+  run_func_timeout: 14400
+
+return_traj: false
+
+wandb:
+  name: ${expname}
+  project: crystalbfn
+  entity: null
+  log_model: True
+  mode: 'online'
+  group: ${expname}
+
+
+wandb_watch:
+  log: 'all'
+  log_freq: 500
+ 
+lr_monitor:
+  logging_interval: "step"
+  log_momentum: False

@@ -1,0 +1,86 @@
+root_path: ${oc.env:PROJECT_ROOT}/data/perov_5
+prop: heat_ref
+num_targets: 1
+# prop: scaled_lattice
+# num_targets: 6
+niggli: true
+primitive: false
+graph_method: crystalnn
+lattice_scale_method: scale_length
+preprocess_workers: 1
+readout: mean
+max_atoms: 5
+otf_graph: false
+eval_model_name: perovskite
+
+
+train_max_epochs: 20000
+early_stopping_patience: 50000
+teacher_forcing_max_epoch: 1500
+
+
+datamodule:
+  _target_: cdvae.pl_data.datamodule.CrystDataModule
+
+  datasets:
+    train:
+      _target_: cdvae.pl_data.dataset.CrystDataset
+      name: Formation energy train
+      path: ${data.root_path}/train.csv
+      prop: ${data.prop}
+      niggli: ${data.niggli}
+      primitive: ${data.primitive}
+      graph_method: ${data.graph_method}
+      lattice_scale_method: ${data.lattice_scale_method}
+      preprocess_workers: ${data.preprocess_workers}
+
+    val:
+      - _target_: cdvae.pl_data.dataset.CrystDataset
+        name: Formation energy val
+        path: ${data.root_path}/val.csv
+        prop: ${data.prop}
+        niggli: ${data.niggli}
+        primitive: ${data.primitive}
+        graph_method: ${data.graph_method}
+        lattice_scale_method: ${data.lattice_scale_method}
+        preprocess_workers: ${data.preprocess_workers}
+
+    test:
+      - _target_: cdvae.pl_data.dataset.CrystDataset
+        name: Formation energy test
+        path: ${data.root_path}/test.csv
+        prop: ${data.prop}
+        niggli: ${data.niggli}
+        primitive: ${data.primitive}
+        graph_method: ${data.graph_method}
+        lattice_scale_method: ${data.lattice_scale_method}
+        preprocess_workers: ${data.preprocess_workers}
+
+  num_workers:
+    train: 0
+    val: 0
+    test: 0
+
+  batch_size:
+    train: 1024
+    val: 256
+    test: 256
+    
+atom_type_map: {3: 0, 4: 1, 5: 2, 7: 3, 8: 4, 9: 5, 11: 6,
+                 12: 7, 13: 8, 14: 9, 16: 10, 19: 11, 
+                  20: 12, 21: 13, 22: 14, 23: 15, 24: 16, 25: 17, 26: 18,
+                   27: 19, 28: 20, 29: 21, 30: 22, 31: 23, 32: 24, 33: 25,
+                    37: 26, 38: 27, 39: 28, 40: 29, 41: 30, 42: 31, 44: 32, 
+                      45: 33, 46: 34, 47: 35, 48: 36, 49: 37, 50: 38, 51: 39,
+                       52: 40, 55: 41, 56: 42, 57: 43, 72: 44, 73: 45, 74: 46,
+                        75: 47, 76: 48, 77: 49, 78: 50, 79: 51, 80: 52, 81: 53, 82: 54, 83: 55}
+# lattice_mean: 1.381167774636165
+lattice_mean: 0.0
+lattice_std: 1.9612357847506667
+length_normalizer: 1.0
+num_atom_types: 56
+num_atoms_dist: {5: 18928}
+
+norm_len: false
+norm_len_log: false
+norm_abc: [0.828700664781699, 0.828700664781699, 0.828700664781699]
