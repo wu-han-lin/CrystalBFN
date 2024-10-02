@@ -15,7 +15,6 @@ from pymatgen.core.structure import Structure, Lattice
 from bfn_toytest.visualize_trajectory import plot_structure,vis_structure_traj
 import warnings
 import matplotlib.pyplot as plt
-# 忽略特定的警告
 warnings.filterwarnings('ignore', category=UserWarning, module='pymatgen.analysis.local_env')
 print('WARNING: ignore pymatgen UserWarning')
 
@@ -163,8 +162,6 @@ def main(args):
                 if i == len(traj)-1:
                     fig = plot_structure(pred_struct, ax, save_name=f'mp20/structure_gen_{select_idx}')
         # vis_structure_traj(structure_traj)
-        # 创建一个8x2的子图布局
-        # 调整子图之间的间距
         plt.tight_layout()
         fig.savefig('./vis_files/gen_structures_combined.png')
         

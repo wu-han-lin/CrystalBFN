@@ -203,12 +203,6 @@ def smact_validity(comp, count,
     threshold = np.max(count)
     compositions = []
     search_space = itertools.product(*ox_combos)
-    # if len(search_space) > search_space_limit:
-    #     # 随机抽样
-    #     print(f"oxidation state search space too large, randomly sample {search_space_limit} choices")
-    #     search_space_index = np.random.choice(
-    #         range(len(search_space)), size=search_space_limit, replace=False)
-    #     search_space = np.array(search_space)[search_space_index].tolist()
 
     for ox_states in search_space:
         stoichs = [(c,) for c in count]

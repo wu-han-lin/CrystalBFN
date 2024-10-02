@@ -13,7 +13,6 @@ from cdvae.common.callbacks import EMACallback
 from eval_utils import load_model
 import warnings
 
-# 忽略特定的警告
 warnings.filterwarnings('ignore', category=UserWarning, module='pymatgen.analysis.local_env')
 print('WARNING: ignore pymatgen UserWarning')
 

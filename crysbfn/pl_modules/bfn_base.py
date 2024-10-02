@@ -482,7 +482,6 @@ class bfnBase(nn.Module):
             h = torch.cat([h, condition_z], dim=1) # hanlin: add condition_z
 
         mu_pos_t_in = mu_pos_t
-        # 把加噪声的cart坐标转换成分数坐标
         # mu_frac = cart_to_frac_coords(mu_pos_t_in, lengths, angles, num_atoms)
         # mu_input = 2 * mu_frac - 1 
 
